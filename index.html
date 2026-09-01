@@ -1,0 +1,878 @@
+<!DOCTYPE html>
+<html lang="ko" data-theme="dark">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <!-- ── 기본 SEO ── -->
+  <title>도장깨기 — 체육관 찾기 · 격투기 커뮤니티</title>
+  <meta name="description" content="내 주변 격투기 도장을 발견하고, 오픈매트에 참여하고, 대회 일정을 확인하세요. 주짓수, 복싱, 유도, MMA, 태권도 — 격투기 생활의 모든 것, 도장깨기.">
+  <meta name="keywords" content="격투기, 도장 찾기, 주짓수, 복싱, 유도, MMA, 태권도, 킥복싱, 오픈매트, 격투기 대회, 체육관">
+  <meta name="author" content="앤써 (Answer)">
+  <meta name="robots" content="index, follow">
+  <link rel="canonical" href="https://도메인주소.com/">
+
+  <!-- ── Open Graph (카카오톡, 페이스북 등 링크 공유 시) ── -->
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="도장깨기">
+  <meta property="og:title" content="도장깨기 — 격투기 생활 플랫폼">
+  <meta property="og:description" content="내 주변 도장 발견 · 오픈매트 · 대회 · 커뮤니티. 격투기를 즐기는 데 필요한 모든 것.">
+  <meta property="og:image" content="https://도메인주소.com/og-image.png">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta property="og:url" content="https://도메인주소.com/">
+  <meta property="og:locale" content="ko_KR">
+
+  <!-- ── Twitter Card (트위터/X 링크 공유 시) ── -->
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="도장깨기 — 격투기 생활 플랫폼">
+  <meta name="twitter:description" content="내 주변 도장 발견 · 오픈매트 · 대회 · 커뮤니티">
+  <meta name="twitter:image" content="https://도메인주소.com/og-image.png">
+
+  <!-- ── 앱 링크 (카카오/네이버 등 모바일 딥링크) ── -->
+  <meta name="apple-itunes-app" content="app-id=6778637544">
+  <meta name="google-play-app" content="app-id=com.dojangggaegi.dojang_ggaegi">
+
+  <link rel="preconnect" href="https://cdn.jsdelivr.net">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.min.css">
+
+  <link rel="icon" href="favicon.png" type="image/png">
+  <link rel="apple-touch-icon" href="apple-touch-icon.png">
+  <style>
+    /* ── 토큰 ─────────────────────────────────────── */
+    :root {
+      --blue: #255DFF;
+      --red:  #E84B55;
+      --yellow: #FFF200;
+
+      /* dark */
+      --bg:        #090D1A;
+      --bg-2:      #0F1628;
+      --bg-3:      #151D35;
+      --surface:   #1A2340;
+      --border:    rgba(255,255,255,0.08);
+      --text:      #F0F4FF;
+      --text-2:    rgba(240,244,255,0.60);
+      --text-3:    rgba(240,244,255,0.35);
+      --pill-bg:   rgba(37,93,255,0.12);
+      --pill-text: #7DA5FF;
+      --card-bg:   rgba(255,255,255,0.04);
+      --card-border: rgba(255,255,255,0.07);
+      --toggle-bg: rgba(255,255,255,0.08);
+      --toggle-icon: #F0F4FF;
+      --footer-bg: #070B16;
+    }
+
+    [data-theme="light"] {
+      --bg:        #F5F7FF;
+      --bg-2:      #ECEFFE;
+      --bg-3:      #E2E7FC;
+      --surface:   #FFFFFF;
+      --border:    rgba(0,0,0,0.07);
+      --text:      #0B1230;
+      --text-2:    rgba(11,18,48,0.58);
+      --text-3:    rgba(11,18,48,0.35);
+      --pill-bg:   rgba(37,93,255,0.10);
+      --pill-text: #1A4BCC;
+      --card-bg:   rgba(255,255,255,0.80);
+      --card-border: rgba(0,0,0,0.07);
+      --toggle-bg: rgba(0,0,0,0.07);
+      --toggle-icon: #0B1230;
+      --footer-bg: #E2E7FC;
+    }
+
+    /* ── 리셋 ─────────────────────────────────────── */
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+    body {
+      font-family: 'Pretendard Variable', 'Pretendard', -apple-system, BlinkMacSystemFont, system-ui, sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.6;
+      overflow-x: hidden;
+      transition: background 0.3s, color 0.3s;
+    }
+    a { text-decoration: none; color: inherit; }
+    img { display: block; max-width: 100%; }
+
+    /* ── 네비 ─────────────────────────────────────── */
+    nav {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+      display: grid;
+      grid-template-columns: auto 1fr auto;   /* 로고 | 탭(가운데) | 액션 */
+      align-items: center;
+      padding: 0 40px;
+      height: 64px;
+      background: rgba(9,13,26,0.72);
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
+      border-bottom: 1px solid var(--border);
+      transition: background 0.3s, border-color 0.3s;
+    }
+    [data-theme="light"] nav {
+      background: rgba(245,247,255,0.80);
+    }
+
+    .nav-menu {
+      justify-self: center;   /* 가운데 정렬 핵심 */
+      display: flex;
+      gap: 4px;
+    }
+
+    @media (max-width: 900px) {
+      .nav-menu { display: none; }
+      nav { grid-template-columns: auto auto; } /* 탭 숨기면 2열로 */
+    }
+    .nav-menu-item {
+      font-size: 14px; font-weight: 600;
+      color: var(--text-2);
+      padding: 6px 12px; border-radius: 8px;
+      transition: color 0.2s, background 0.2s;
+    }
+    .nav-menu-item:hover {
+      color: var(--text);
+      background: var(--toggle-bg);
+    }
+    /* 모바일에서 메뉴 숨김 */
+    @media (max-width: 900px) {
+      .nav-menu { display: none; }
+    }
+    .nav-logo {
+      display: flex; align-items: center; gap: 10px;
+      font-size: 18px; font-weight: 800; letter-spacing: -0.5px;
+    }
+    .nav-logo .accent { color: var(--blue); }    
+    .nav-right { display: flex; align-items: center; gap: 16px; }
+
+    .theme-toggle {
+      width: 40px; height: 40px; border-radius: 50%;
+      background: var(--toggle-bg);
+      border: none; cursor: pointer;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 18px;
+      transition: background 0.2s, transform 0.2s;
+    }
+    .theme-toggle:hover { transform: scale(1.1); }
+
+    .nav-dl {
+      display: flex; align-items: center; gap: 8px;
+      background: var(--blue);
+      color: #fff;
+      padding: 8px 20px;
+      border-radius: 999px;
+      font-size: 14px; font-weight: 700;
+      transition: opacity 0.2s, transform 0.2s;
+    }
+    .nav-dl:hover { opacity: 0.88; transform: translateY(-1px); }
+
+    /* ── 히어로 ───────────────────────────────────── */
+    .hero {
+      min-height: 100vh;
+      display: flex; align-items: center;
+      padding: 96px 40px 80px;
+      position: relative;
+      overflow: hidden;
+    }
+    .hero-bg {
+      position: absolute; inset: 0; z-index: 0;
+      background:
+        radial-gradient(ellipse 60% 50% at 70% 50%, rgba(37,93,255,0.13) 0%, transparent 70%),
+        radial-gradient(ellipse 40% 40% at 20% 80%, rgba(232,75,85,0.09) 0%, transparent 60%);
+    }
+    .hero-grid {
+      position: absolute; inset: 0; z-index: 0;
+      background-image:
+        linear-gradient(rgba(37,93,255,0.04) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(37,93,255,0.04) 1px, transparent 1px);
+      background-size: 48px 48px;
+    }
+    .hero-inner {
+      position: relative; z-index: 1;
+      max-width: 1100px; margin: 0 auto; width: 100%;
+      display: grid; grid-template-columns: 1fr 420px; gap: 60px; align-items: center;
+    }
+    .hero-badge {
+      display: inline-flex; align-items: center; gap: 8px;
+      background: var(--pill-bg);
+      color: var(--pill-text);
+      border: 1px solid rgba(37,93,255,0.20);
+      padding: 6px 14px; border-radius: 999px;
+      font-size: 13px; font-weight: 600;
+      margin-bottom: 24px;
+      opacity: 0;
+      animation: fadeUp 0.7s 0.1s forwards;
+    }
+    .hero-badge::before { content: ''; width: 6px; height: 6px; border-radius: 50%; background: var(--blue); display: block; animation: pulse 2s infinite; }
+    @keyframes pulse { 0%,100%{opacity:1;transform:scale(1)} 50%{opacity:0.5;transform:scale(1.3)} }
+
+    .hero-title {
+      font-size: clamp(40px, 5.5vw, 68px);
+      font-weight: 900;
+      line-height: 1.10;
+      letter-spacing: -2px;
+      margin-bottom: 24px;
+      opacity: 0;
+      animation: fadeUp 0.7s 0.2s forwards;
+    }
+    .hero-title em {
+      font-style: normal;
+      background: linear-gradient(135deg, var(--blue) 0%, #7DA5FF 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+    .hero-title .accent-red {
+      background: linear-gradient(135deg, var(--red) 0%, #FF8A92 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+    .hero-desc {
+      font-size: 18px; color: var(--text-2); line-height: 1.75;
+      max-width: 480px;
+      margin-bottom: 40px;
+      opacity: 0;
+      animation: fadeUp 0.7s 0.35s forwards;
+    }
+    .hero-cta {
+      display: flex; gap: 12px; flex-wrap: wrap;
+      opacity: 0;
+      animation: fadeUp 0.7s 0.5s forwards;
+    }
+    .btn-store {
+      display: flex; align-items: center; gap: 10px;
+      padding: 14px 24px; border-radius: 14px;
+      font-size: 14px; font-weight: 700;
+      transition: transform 0.2s, opacity 0.2s, box-shadow 0.2s;
+    }
+    .btn-store:hover { transform: translateY(-2px); box-shadow: 0 12px 32px rgba(37,93,255,0.25); }
+    .btn-apple {
+      background: var(--text);
+      color: var(--bg);
+    }
+    .btn-google {
+      background: var(--card-bg);
+      color: var(--text);
+      border: 1px solid var(--border);
+    }
+    [data-theme="light"] .btn-google { border-color: rgba(0,0,0,0.12); }
+    .btn-store svg { flex-shrink: 0; }
+    .btn-store-label { display: flex; flex-direction: column; }
+    .btn-store-sub { font-size: 11px; font-weight: 500; opacity: 0.65; }
+    .btn-store-name { font-size: 15px; font-weight: 800; }
+
+    /* 폰 목업 */
+    .hero-phone {
+      opacity: 0;
+      animation: slideUp 0.9s 0.4s cubic-bezier(0.22,1,0.36,1) forwards;
+    }
+    .phone-wrap {
+      position: relative;
+      width: 280px; margin: 0 auto;
+    }
+    .phone-shell {
+      width: 280px; height: 572px;
+      background: var(--surface);
+      border-radius: 44px;
+      border: 6px solid rgba(255,255,255,0.12);
+      box-shadow:
+        0 0 0 1px rgba(255,255,255,0.06),
+        0 40px 80px rgba(0,0,0,0.5),
+        0 8px 16px rgba(37,93,255,0.15);
+      overflow: hidden;
+      position: relative;
+    }
+    [data-theme="light"] .phone-shell {
+      border-color: rgba(0,0,0,0.10);
+      box-shadow: 0 40px 80px rgba(0,0,0,0.18), 0 8px 16px rgba(37,93,255,0.10);
+    }
+    .phone-screen {
+      width: 100%; height: 100%;
+      background: linear-gradient(160deg, var(--bg-2) 0%, var(--bg-3) 100%);
+      display: flex; flex-direction: column;
+      overflow: hidden;
+    }
+    .phone-notch {
+      width: 100px; height: 28px;
+      background: var(--surface);
+      border-radius: 0 0 18px 18px;
+      margin: 0 auto 0;
+      flex-shrink: 0;
+    }
+    .phone-content {
+      flex: 1; padding: 12px 16px 16px;
+      display: flex; flex-direction: column; gap: 10px;
+    }
+    .phone-appbar {
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 4px 0;
+    }
+    .phone-appbar-title { font-size: 18px; font-weight: 800; }
+    .phone-appbar-icons { display: flex; gap: 8px; }
+    .phone-icon-dot {
+      width: 28px; height: 28px; border-radius: 50%;
+      background: var(--blue); opacity: 0.15;
+    }
+    .phone-section-label {
+      font-size: 11px; font-weight: 700; color: var(--text-2);
+      letter-spacing: 0.5px;
+    }
+    .phone-card {
+      background: var(--card-bg);
+      border: 1px solid var(--card-border);
+      border-radius: 16px;
+      padding: 12px;
+      display: flex; align-items: center; gap: 10px;
+    }
+    .phone-card-img {
+      width: 44px; height: 44px; border-radius: 10px;
+      flex-shrink: 0;
+    }
+    .phone-card-info { flex: 1; min-width: 0; }
+    .phone-card-name { font-size: 13px; font-weight: 700; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+    .phone-card-sub { font-size: 11px; color: var(--text-2); margin-top: 2px; }
+    .phone-card-badge {
+      font-size: 10px; font-weight: 700;
+      background: rgba(37,93,255,0.15); color: #7DA5FF;
+      padding: 2px 8px; border-radius: 999px;
+    }
+    .phone-pills { display: flex; gap: 6px; flex-wrap: wrap; }
+    .phone-pill {
+      font-size: 10px; font-weight: 600;
+      background: var(--card-bg); border: 1px solid var(--card-border);
+      color: var(--text-2);
+      padding: 3px 9px; border-radius: 999px;
+    }
+    .phone-highlight { background: var(--blue); }
+
+    /* 플로팅 뱃지 */
+    .phone-float {
+      position: absolute;
+      background: var(--surface);
+      border: 1px solid var(--card-border);
+      border-radius: 14px;
+      padding: 10px 14px;
+      box-shadow: 0 8px 32px rgba(0,0,0,0.24);
+      font-size: 12px; font-weight: 600;
+      white-space: nowrap;
+    }
+    .phone-float-1 {
+      bottom: 80px; right: -60px;
+      animation: floatA 4s ease-in-out infinite;
+    }
+    .phone-float-2 {
+      top: 160px; left: -60px;
+      animation: floatB 4s ease-in-out infinite;
+    }
+    .phone-float-number { font-size: 20px; font-weight: 900; color: var(--blue); }
+    .phone-float-label { font-size: 11px; color: var(--text-2); font-weight: 500; }
+    @keyframes floatA { 0%,100%{transform:translateY(0)} 50%{transform:translateY(-8px)} }
+    @keyframes floatB { 0%,100%{transform:translateY(-4px)} 50%{transform:translateY(4px)} }
+
+    /* ── 마키 ─────────────────────────────────────── */
+    .marquee-section {
+      padding: 40px 0;
+      border-top: 1px solid var(--border);
+      border-bottom: 1px solid var(--border);
+      overflow: hidden;
+      position: relative;
+    }
+    .marquee-track {
+      display: flex; gap: 0;
+      animation: marquee 28s linear infinite;
+      width: max-content;
+    }
+    .marquee-track:hover { animation-play-state: paused; }
+    @keyframes marquee { 0%{transform:translateX(0)} 100%{transform:translateX(-50%)} }
+    .marquee-item {
+      display: flex; align-items: center; gap: 10px;
+      padding: 0 28px;
+      font-size: 15px; font-weight: 700;
+      color: var(--text-2);
+      white-space: nowrap;
+    }
+    .marquee-dot { width: 5px; height: 5px; border-radius: 50%; background: var(--text-3); flex-shrink: 0; }
+    .marquee-item.accent { color: var(--blue); }
+
+    /* ── 기능 섹션 ────────────────────────────────── */
+    .section { padding: 100px 40px; max-width: 1100px; margin: 0 auto; }
+    .section-label {
+      font-size: 13px; font-weight: 700;
+      color: var(--blue); letter-spacing: 0.5px;
+      margin-bottom: 16px;
+    }
+    .section-title {
+      font-size: clamp(28px, 4vw, 44px);
+      font-weight: 900; letter-spacing: -1.5px;
+      line-height: 1.15; margin-bottom: 16px;
+    }
+    .section-desc { font-size: 17px; color: var(--text-2); line-height: 1.75; max-width: 520px; }
+
+    .features-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 16px;
+      margin-top: 56px;
+    }
+    .feature-card {
+      background: var(--card-bg);
+      border: 1px solid var(--card-border);
+      border-radius: 24px;
+      padding: 28px;
+      transition: transform 0.25s, border-color 0.25s, box-shadow 0.25s;
+      opacity: 0;
+      transform: translateY(24px);
+    }
+    .feature-card.visible {
+      opacity: 1; transform: translateY(0);
+      transition: opacity 0.5s, transform 0.5s, border-color 0.25s, box-shadow 0.25s;
+    }
+    .feature-card:hover {
+      transform: translateY(-4px);
+      border-color: rgba(37,93,255,0.30);
+      box-shadow: 0 16px 40px rgba(37,93,255,0.10);
+    }
+    .feature-icon {
+      font-size: 32px; margin-bottom: 16px;
+      width: 56px; height: 56px;
+      background: var(--pill-bg);
+      border-radius: 16px;
+      display: flex; align-items: center; justify-content: center;
+    }
+    .feature-card h3 { font-size: 17px; font-weight: 800; margin-bottom: 8px; }
+    .feature-card p { font-size: 14px; color: var(--text-2); line-height: 1.7; }
+
+    .feature-card.wide { grid-column: span 2; }
+    .feature-card.tall { display: flex; flex-direction: row; gap: 24px; align-items: flex-start; }
+    .feature-card.accent-blue { border-color: rgba(37,93,255,0.25); background: rgba(37,93,255,0.06); }
+    .feature-card.accent-red { border-color: rgba(232,75,85,0.20); background: rgba(232,75,85,0.05); }
+
+    /* ── 통계 ─────────────────────────────────────── */
+    .stats-wrap {
+      padding: 80px 40px;
+      background: var(--bg-2);
+      border-top: 1px solid var(--border);
+      border-bottom: 1px solid var(--border);
+    }
+    .stats-inner {
+      max-width: 1100px; margin: 0 auto;
+      display: grid; grid-template-columns: repeat(3, 1fr); gap: 2px;
+    }
+    .stat-item {
+      padding: 40px 48px;
+      border-right: 1px solid var(--border);
+      opacity: 0; transform: translateY(16px);
+    }
+    .stat-item:last-child { border-right: none; }
+    .stat-item.visible { opacity: 1; transform: translateY(0); transition: opacity 0.5s, transform 0.5s; }
+    .stat-number { font-size: 52px; font-weight: 900; letter-spacing: -2px; line-height: 1; }
+    .stat-number span { color: var(--blue); }
+    .stat-label { font-size: 15px; color: var(--text-2); margin-top: 8px; }
+
+    /* ── CTA 섹션 ─────────────────────────────────── */
+    .cta-section {
+      padding: 120px 40px;
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+    }
+    .cta-bg {
+      position: absolute; inset: 0;
+      background: radial-gradient(ellipse 70% 60% at 50% 50%, rgba(37,93,255,0.12) 0%, transparent 70%);
+      z-index: 0;
+    }
+    .cta-inner { position: relative; z-index: 1; max-width: 600px; margin: 0 auto; }
+    .cta-inner .section-label { text-align: center; }
+    .cta-title {
+      font-size: clamp(32px, 5vw, 52px);
+      font-weight: 900; letter-spacing: -2px;
+      line-height: 1.1; margin-bottom: 20px;
+    }
+    .cta-desc { font-size: 17px; color: var(--text-2); margin-bottom: 40px; line-height: 1.7; }
+    .cta-buttons { display: flex; gap: 12px; justify-content: center; flex-wrap: wrap; }
+
+    /* ── 푸터 ─────────────────────────────────────── */
+    footer {
+      background: var(--footer-bg);
+      border-top: 1px solid var(--border);
+      padding: 48px 40px 40px;
+    }
+    .footer-inner {
+      max-width: 1100px; margin: 0 auto;
+      display: flex; justify-content: space-between; align-items: flex-start;
+      gap: 32px; flex-wrap: wrap;
+    }
+    .footer-brand { display: flex; flex-direction: column; gap: 8px; }
+    .footer-brand-name { font-size: 18px; font-weight: 800; }
+    .footer-brand-name span { color: var(--blue); }
+    .footer-brand-desc { font-size: 13px; color: var(--text-3); max-width: 240px; line-height: 1.6; }
+    .footer-links { display: flex; gap: 24px; }
+    .footer-link { font-size: 13px; color: var(--text-3); transition: color 0.2s; }
+    .footer-link:hover { color: var(--text-2); }
+    .footer-bottom {
+      max-width: 1100px; margin: 32px auto 0;
+      padding-top: 24px; border-top: 1px solid var(--border);
+      display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 8px;
+    }
+    .footer-copy { font-size: 12px; color: var(--text-3); }
+
+    /* ── 애니메이션 ───────────────────────────────── */
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(20px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+    @keyframes slideUp {
+      from { opacity: 0; transform: translateY(48px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+
+    /* ── 반응형 ───────────────────────────────────── */
+    @media (max-width: 900px) {
+      nav { padding: 0 20px; }
+      .hero { padding: 88px 20px 60px; }
+      .hero-inner { grid-template-columns: 1fr; gap: 40px; }
+      .hero-phone { display: none; }
+      .hero-title { font-size: clamp(36px, 8vw, 52px); }
+      .features-grid { grid-template-columns: 1fr; }
+      .feature-card.wide { grid-column: span 1; }
+      .feature-card.tall { flex-direction: column; }
+      .stats-inner { grid-template-columns: 1fr; gap: 0; }
+      .stat-item { border-right: none; border-bottom: 1px solid var(--border); padding: 32px 24px; }
+      .stat-item:last-child { border-bottom: none; }
+      .section { padding: 72px 20px; }
+      .cta-section { padding: 80px 20px; }
+      footer { padding: 40px 20px; }
+      .footer-inner { flex-direction: column; gap: 24px; }
+      .footer-bottom { flex-direction: column; align-items: flex-start; }
+    }
+
+    /* 모션 감소 */
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after { animation-duration: 0.01ms !important; transition-duration: 0.01ms !important; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- ── 네비 ──────────────────────────────────────── -->
+<nav>
+  <a href="#home" class="nav-logo">
+    <span class="logo-emoji">🥋</span>
+    <span class="logo-text"><span class="accent">도장</span>깨기</span>
+  </a>
+
+  <div  class="nav-menu">
+    <a href="#features" class="nav-menu-item">기능</a>
+    <a href="#download" class="nav-menu-item">다운로드</a>
+    <a href="support.html" class="nav-menu-item">고객지원</a>
+  </div >
+
+  <div class="nav-right">
+    <button class="theme-toggle" id="themeToggle" aria-label="테마 전환">🌙</button>
+    <a href="#download" class="nav-dl">무료 다운로드 →</a>
+  </div>
+</nav>
+
+<!-- ── 히어로 ─────────────────────────────────────── -->
+<section class="hero" id="home">
+  <div class="hero-bg"></div>
+  <div class="hero-grid"></div>
+  <div class="hero-inner">
+    <div class="hero-copy">
+      <div class="hero-badge">🇰🇷 격투기 생활 플랫폼</div>
+      <h1 class="hero-title">
+        내 주변<br>
+        <em>도장을</em><br>
+        <span class="accent-red">찾으러 가자</span>
+      </h1>
+      <p class="hero-desc">
+        주짓수, 유도, 복싱, MMA — 내 생활권 안의 격투기 도장을 발견하고, 오픈매트에 참여하고, 대회 일정을 한눈에 확인하세요.
+      </p>
+      <div class="hero-cta">
+        <a href="https://apps.apple.com/kr/app/%EB%8F%84%EC%9E%A5%EA%B9%A8%EA%B8%B0-%EC%B2%B4%EC%9C%A1%EA%B4%80-%EC%B0%BE%EA%B8%B0-%EA%B2%A9%ED%88%AC%EA%B8%B0-%EC%BB%A4%EB%AE%A4%EB%8B%88%ED%8B%B0/id6778637544" target="_blank" class="btn-store btn-apple">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.8-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.83M13 3.5c.73-.83 1.94-1.46 2.94-1.5.13 1.17-.34 2.35-1.04 3.19-.69.85-1.83 1.51-2.95 1.42-.15-1.15.41-2.35 1.05-3.11z"/></svg>
+          <div class="btn-store-label">
+            <span class="btn-store-sub">App Store에서</span>
+            <span class="btn-store-name">다운로드</span>
+          </div>
+        </a>
+        <a href="https://play.google.com/store/apps/details?id=com.dojangggaegi.dojang_ggaegi" target="_blank" class="btn-store btn-google">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none"><path d="M3.18 1A1 1 0 0 0 2 2.06v19.88a1 1 0 0 0 1.18.97l11.5-6.63-3.5-3.5L3.18 1z" fill="#4CAF50"/><path d="M21.5 11.12L18.3 9.32 14.7 12l3.6 2.68 2.7-1.56a1 1 0 0 0 0-1.75v-.25z" fill="#FFC107"/><path d="M3.18 1l7.96 8.34L14.7 12l3.6-2.68-1.98-1.14L3.18 1z" fill="#FF3D00"/><path d="M3.18 23l11.52-6.32-3.56-3.56L3.18 23z" fill="#03A9F4"/></svg>
+          <div class="btn-store-label">
+            <span class="btn-store-sub">Google Play에서</span>
+            <span class="btn-store-name">다운로드</span>
+          </div>
+        </a>
+      </div>
+    </div>
+
+    <div class="hero-phone">
+      <div class="phone-wrap">
+        <div class="phone-shell">
+          <div class="phone-screen">
+            <div class="phone-notch"></div>
+            <div class="phone-content">
+              <div class="phone-appbar">
+                <span class="phone-appbar-title">홈</span>
+                <div class="phone-appbar-icons">
+                  <div class="phone-icon-dot"></div>
+                  <div class="phone-icon-dot" style="background:var(--red);"></div>
+                </div>
+              </div>
+              <div class="phone-section-label">내 주변 인기 도장</div>
+              <div class="phone-card">
+                <div class="phone-card-img" style="background:linear-gradient(135deg,#255DFF22,#255DFF44);display:flex;align-items:center;justify-content:center;font-size:22px;">🥋</div>
+                <div class="phone-card-info">
+                  <div class="phone-card-name">강남 주짓수</div>
+                  <div class="phone-card-sub">서울 강남구 · 138m</div>
+                </div>
+                <div class="phone-card-badge">BJJ</div>
+              </div>
+              <div class="phone-card">
+                <div class="phone-card-img" style="background:linear-gradient(135deg,#E84B5522,#E84B5544);display:flex;align-items:center;justify-content:center;font-size:22px;">🥊</div>
+                <div class="phone-card-info">
+                  <div class="phone-card-name">팀 알파 복싱</div>
+                  <div class="phone-card-sub">서울 마포구 · 340m</div>
+                </div>
+                <div class="phone-card-badge" style="background:rgba(232,75,85,0.12);color:#FF8A92;">복싱</div>
+              </div>
+              <div class="phone-section-label" style="margin-top:4px;">오픈매트</div>
+              <div class="phone-card">
+                <div class="phone-card-info">
+                  <div class="phone-card-name">토요 오픈매트</div>
+                  <div class="phone-card-sub">08/31 (토) · 무료</div>
+                </div>
+                <div class="phone-pills">
+                  <div class="phone-pill phone-highlight" style="color:#fff;">참여 12/20</div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="phone-float phone-float-1">
+          <div class="phone-float-number">⭐ 4.9</div>
+          <div class="phone-float-label">평균 도장 평점</div>
+        </div>
+        <div class="phone-float phone-float-2">
+          <div class="phone-float-number" style="color:var(--red);">🥊</div>
+          <div class="phone-float-label">대회 일정 확인</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ── 마키 ──────────────────────────────────────── -->
+<div class="marquee-section">
+  <div class="marquee-track" id="marquee">
+    <div class="marquee-item accent">🥋 주짓수</div><div class="marquee-dot"></div>
+    <div class="marquee-item">🥊 복싱</div><div class="marquee-dot"></div>
+    <div class="marquee-item">🦵 태권도</div><div class="marquee-dot"></div>
+    <div class="marquee-item accent">⚔️ MMA</div><div class="marquee-dot"></div>
+    <div class="marquee-item">🎽 유도</div><div class="marquee-dot"></div>
+    <div class="marquee-item">🦵 킥복싱</div><div class="marquee-dot"></div>
+    <div class="marquee-item accent">🤼 레슬링</div><div class="marquee-dot"></div>
+    <div class="marquee-item">🗡️ 검도</div><div class="marquee-dot"></div>
+    <div class="marquee-item">🥷 합기도</div><div class="marquee-dot"></div>
+    <div class="marquee-item accent">🏆 오픈매트</div><div class="marquee-dot"></div>
+    <div class="marquee-item">📅 대회 일정</div><div class="marquee-dot"></div>
+    <div class="marquee-item accent">💬 커뮤니티</div><div class="marquee-dot"></div>
+    <!-- 복제 (seamless) -->
+    <div class="marquee-item accent">🥋 주짓수</div><div class="marquee-dot"></div>
+    <div class="marquee-item">🥊 복싱</div><div class="marquee-dot"></div>
+    <div class="marquee-item">🦵 태권도</div><div class="marquee-dot"></div>
+    <div class="marquee-item accent">⚔️ MMA</div><div class="marquee-dot"></div>
+    <div class="marquee-item">🎽 유도</div><div class="marquee-dot"></div>
+    <div class="marquee-item">🦵 킥복싱</div><div class="marquee-dot"></div>
+    <div class="marquee-item accent">🤼 레슬링</div><div class="marquee-dot"></div>
+    <div class="marquee-item">🗡️ 검도</div><div class="marquee-dot"></div>
+    <div class="marquee-item">🥷 합기도</div><div class="marquee-dot"></div>
+    <div class="marquee-item accent">🏆 오픈매트</div><div class="marquee-dot"></div>
+    <div class="marquee-item">📅 대회 일정</div><div class="marquee-dot"></div>
+    <div class="marquee-item accent">💬 커뮤니티</div><div class="marquee-dot"></div>
+  </div>
+</div>
+
+<!-- ── 기능 섹션 ──────────────────────────────────── -->
+<div style="padding: 100px 40px 0; max-width: 1100px; margin: 0 auto;" id="features">
+  <div class="section-label">FEATURES</div>
+  <h2 class="section-title">격투기 생활의<br>모든 것이 여기에</h2>
+  <p class="section-desc">도장 찾기부터 오픈매트, 대회 일정, 커뮤니티까지. 격투기를 즐기는 데 필요한 모든 기능을 하나의 앱에서.</p>
+</div>
+
+<div style="padding: 40px 40px 100px; max-width: 1100px; margin: 0 auto;">
+  <div class="features-grid">
+    <div class="feature-card accent-blue wide tall reveal">
+      <div>
+        <div class="feature-icon">📍</div>
+        <h3>내 주변 도장 발견</h3>
+        <p>집과 직장 생활권을 설정하면 가장 가깝고 평점 높은 도장을 먼저 보여드려요. 종목별, 거리별 필터로 딱 맞는 도장을 찾아보세요.</p>
+      </div>
+      <div style="flex:1; min-width:0; display:flex; flex-direction:column; gap:8px; margin-top:8px;">
+        <div style="height:8px; border-radius:999px; background:rgba(37,93,255,0.15); overflow:hidden;">
+          <div style="width:78%; height:100%; background:var(--blue); border-radius:999px;"></div>
+        </div>
+        <div style="height:8px; border-radius:999px; background:rgba(37,93,255,0.10); overflow:hidden;">
+          <div style="width:55%; height:100%; background:rgba(37,93,255,0.5); border-radius:999px;"></div>
+        </div>
+        <div style="height:8px; border-radius:999px; background:rgba(37,93,255,0.08); overflow:hidden;">
+          <div style="width:40%; height:100%; background:rgba(37,93,255,0.3); border-radius:999px;"></div>
+        </div>
+        <div style="font-size:12px; color:var(--text-3); margin-top:4px;">거리 · 평점 · 리뷰 기반 정렬</div>
+      </div>
+    </div>
+
+    <div class="feature-card reveal">
+      <div class="feature-icon">🏆</div>
+      <h3>오픈매트</h3>
+      <p>주변에서 열리는 오픈매트를 찾아 참여하세요. 날짜, 요금, 참여 인원을 한눈에 확인할 수 있어요.</p>
+    </div>
+
+    <div class="feature-card reveal">
+      <div class="feature-icon">🗓️</div>
+      <h3>대회 일정</h3>
+      <p>종목별 대회 일정을 빠르게 확인하세요. 주최 단체, 장소, 접수 기간까지 한 화면에서 볼 수 있어요.</p>
+    </div>
+
+    <div class="feature-card accent-red reveal">
+      <div class="feature-icon">💬</div>
+      <h3>커뮤니티</h3>
+      <p>같은 종목을 배우는 사람들과 이야기를 나누세요. 도장 피드, 질문, 후기, 대회 정보가 모이는 공간이에요.</p>
+    </div>
+
+    <div class="feature-card reveal">
+      <div class="feature-icon">📢</div>
+      <h3>도장 공지방</h3>
+      <p>관장님이 올린 공지를 놓치지 마세요. 승급 소식, 대회 공지, 휴관 안내를 앱에서 바로 받아볼 수 있어요.</p>
+    </div>
+
+    <div class="feature-card reveal">
+      <div class="feature-icon">🎖️</div>
+      <h3>승급 체계 관리</h3>
+      <p>도장마다 띠 체계를 자유롭게 설정하고, 회원의 승급 이력을 한눈에 관리하세요.</p>
+    </div>
+  </div>
+</div>
+
+<!-- ── 통계 ─────────────────────────────────────── -->
+<div class="stats-wrap" id="stats">
+  <div class="stats-inner">
+    <div class="stat-item reveal">
+      <div class="stat-number"><span>10</span>+</div>
+      <div class="stat-label">지원 격투기 종목</div>
+    </div>
+    <div class="stat-item reveal">
+      <div class="stat-number"><span>무료</span></div>
+      <div class="stat-label">도장 등록 및 기본 기능</div>
+    </div>
+    <div class="stat-item reveal">
+      <div class="stat-number"><span>iOS</span> · <span>Android</span></div>
+      <div class="stat-label">양대 플랫폼 동시 지원</div>
+    </div>
+  </div>
+</div>
+
+<!-- ── CTA ──────────────────────────────────────── -->
+<section class="cta-section" id="download">
+  <div class="cta-bg"></div>
+  <div class="cta-inner">
+    <div class="section-label">지금 바로 시작하세요</div>
+    <h2 class="cta-title">격투기 생활,<br>도장깨기로 시작하세요</h2>
+    <p class="cta-desc">설치는 무료, 도장 등록도 무료. 내 주변 도장을 지금 바로 찾아보세요.</p>
+    <div class="cta-buttons">
+      <a href="https://apps.apple.com/kr/app/%EB%8F%84%EC%9E%A5%EA%B9%A8%EA%B8%B0-%EC%B2%B4%EC%9C%A1%EA%B4%80-%EC%B0%BE%EA%B8%B0-%EA%B2%A9%ED%88%AC%EA%B8%B0-%EC%BB%A4%EB%AE%A4%EB%8B%88%ED%8B%B0/id6778637544" target="_blank" class="btn-store btn-apple">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.8-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.83M13 3.5c.73-.83 1.94-1.46 2.94-1.5.13 1.17-.34 2.35-1.04 3.19-.69.85-1.83 1.51-2.95 1.42-.15-1.15.41-2.35 1.05-3.11z"/></svg>
+        <div class="btn-store-label">
+          <span class="btn-store-sub">App Store에서</span>
+          <span class="btn-store-name">다운로드</span>
+        </div>
+      </a>
+      <a href="https://play.google.com/store/apps/details?id=com.dojangggaegi.dojang_ggaegi" target="_blank" class="btn-store btn-google">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none"><path d="M3.18 1A1 1 0 0 0 2 2.06v19.88a1 1 0 0 0 1.18.97l11.5-6.63-3.5-3.5L3.18 1z" fill="#4CAF50"/><path d="M21.5 11.12L18.3 9.32 14.7 12l3.6 2.68 2.7-1.56a1 1 0 0 0 0-1.75v-.25z" fill="#FFC107"/><path d="M3.18 1l7.96 8.34L14.7 12l3.6-2.68-1.98-1.14L3.18 1z" fill="#FF3D00"/><path d="M3.18 23l11.52-6.32-3.56-3.56L3.18 23z" fill="#03A9F4"/></svg>
+        <div class="btn-store-label">
+          <span class="btn-store-sub">Google Play에서</span>
+          <span class="btn-store-name">다운로드</span>
+        </div>
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- ── 푸터 ──────────────────────────────────────── -->
+<footer>
+  <div class="footer-inner">
+    <div class="footer-brand">
+      <div class="footer-brand-name">🥋 <span>도장</span>깨기</div>
+      <div class="footer-brand-desc">격투기 도장 찾기 · 오픈매트 · 대회 · 커뮤니티<br>앤써(Answer)</div>
+    </div>
+    <div style="display:flex; flex-direction:column; gap:12px; align-items:flex-end;">
+      <div class="footer-links">
+        <a href="support.html" class="footer-link">고객 지원</a>
+        <a href="privacy.html" class="footer-link">개인정보처리방침</a>
+        <a href="location-terms.html" class="footer-link">위치정보서비스 이용약관</a>
+      </div>
+      <div style="font-size:13px; color:var(--text-3);">answer2451@gmail.com</div>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <div class="footer-copy">© 2026 앤써 (Answer). All rights reserved.</div>
+    <div style="display:flex;gap:12px;">
+      <a href="https://apps.apple.com/kr/app/%EB%8F%84%EC%9E%A5%EA%B9%A8%EA%B8%B0-%EC%B2%B4%EC%9C%A1%EA%B4%80-%EC%B0%BE%EA%B8%B0-%EA%B2%A9%ED%88%AC%EA%B8%B0-%EC%BB%A4%EB%AE%A4%EB%8B%88%ED%8B%B0/id6778637544" target="_blank" style="font-size:12px;color:var(--text-3);">App Store</a>
+      <a href="https://play.google.com/store/apps/details?id=com.dojangggaegi.dojang_ggaegi" target="_blank" style="font-size:12px;color:var(--text-3);">Google Play</a>
+    </div>
+  </div>
+</footer>
+
+<script>
+  // ── 테마 토글 ──
+  const toggle = document.getElementById('themeToggle');
+  const html = document.documentElement;
+  const saved = localStorage.getItem('theme') || 'dark';
+  const sections = document.querySelectorAll('section[id], div[id]');
+  const navItems = document.querySelectorAll('.nav-menu-item');
+  html.setAttribute('data-theme', saved);
+  toggle.textContent = saved === 'dark' ? '🌙' : '☀️';
+
+  toggle.addEventListener('click', () => {
+    const next = html.getAttribute('data-theme') === 'dark' ? 'light' : 'dark';
+    html.setAttribute('data-theme', next);
+    toggle.textContent = next === 'dark' ? '🌙' : '☀️';
+    localStorage.setItem('theme', next);
+  });
+
+  // ── 스크롤 reveal ──
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach((entry, i) => {
+      if (entry.isIntersecting) {
+        const delay = Array.from(entry.target.parentElement?.children || []).indexOf(entry.target) * 80;
+        setTimeout(() => entry.target.classList.add('visible'), delay);
+        observer.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.12 });
+
+  document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+
+  // stat도 reveal 적용
+  document.querySelectorAll('.stat-item').forEach(el => {
+    el.classList.add('reveal');
+    observer.observe(el);
+  });
+
+  const sectionObserver = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        navItems.forEach(item => {
+          item.style.color = '';
+          if (item.getAttribute('href') === `#${entry.target.id}`) {
+            item.style.color = 'var(--blue)';
+          }
+        });
+      }
+    });
+  }, { threshold: 0.4 });
+
+  sections.forEach(s => sectionObserver.observe(s));
+</script>
+
+</body>
+</html>

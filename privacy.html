@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html lang="ko" data-theme="dark">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>개인정보처리방침 — 도장깨기</title>
+  <link rel="preconnect" href="https://cdn.jsdelivr.net">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.min.css">
+  <style>
+    :root {
+      --blue: #255DFF;
+      --bg: #090D1A; --bg-2: #0F1628;
+      --surface: #1A2340;
+      --border: rgba(255,255,255,0.08);
+      --text: #F0F4FF; --text-2: rgba(240,244,255,0.60); --text-3: rgba(240,244,255,0.35);
+      --card-bg: rgba(255,255,255,0.04); --card-border: rgba(255,255,255,0.07);
+      --table-head: rgba(37,93,255,0.10);
+    }
+    [data-theme="light"] {
+      --bg: #F5F7FF; --bg-2: #ECEFFE;
+      --surface: #FFFFFF;
+      --border: rgba(0,0,0,0.07);
+      --text: #0B1230; --text-2: rgba(11,18,48,0.58); --text-3: rgba(11,18,48,0.35);
+      --card-bg: rgba(255,255,255,0.80); --card-border: rgba(0,0,0,0.07);
+      --table-head: rgba(37,93,255,0.06);
+    }
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      font-family: 'Pretendard Variable', 'Pretendard', -apple-system, system-ui, sans-serif;
+      background: var(--bg); color: var(--text);
+      line-height: 1.75; transition: background 0.3s, color 0.3s;
+    }
+    nav {
+      position: sticky; top: 0; z-index: 100;
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 0 40px; height: 60px;
+      background: rgba(9,13,26,0.80);
+      backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px);
+      border-bottom: 1px solid var(--border);
+      transition: background 0.3s;
+    }
+    [data-theme="light"] nav { background: rgba(245,247,255,0.85); }
+    .nav-logo { font-size: 16px; font-weight: 800; text-decoration: none; color: var(--text); }
+    .nav-logo span { color: var(--blue); }
+    .nav-back { font-size: 13px; color: var(--text-2); transition: color 0.2s; text-decoration: none; }
+    .nav-back:hover { color: var(--blue); }
+    .theme-toggle {
+      width: 36px; height: 36px; border-radius: 50%;
+      background: rgba(255,255,255,0.08); border: none; cursor: pointer;
+      font-size: 16px; display: flex; align-items: center; justify-content: center;
+      transition: transform 0.2s;
+    }
+    .theme-toggle:hover { transform: scale(1.1); }
+    [data-theme="light"] .theme-toggle { background: rgba(0,0,0,0.07); }
+
+    .container { max-width: 760px; margin: 0 auto; padding: 56px 24px 80px; }
+    .doc-label {
+      display: inline-block;
+      font-size: 12px; font-weight: 700; letter-spacing: 0.5px;
+      color: var(--blue);
+      background: rgba(37,93,255,0.10);
+      padding: 4px 12px; border-radius: 999px;
+      margin-bottom: 20px;
+    }
+    h1 { font-size: 28px; font-weight: 900; letter-spacing: -1px; margin-bottom: 8px; }
+    .date { font-size: 13px; color: var(--text-3); margin-bottom: 36px; }
+    .intro {
+      background: var(--card-bg); border: 1px solid var(--card-border);
+      border-radius: 16px; padding: 20px 24px; margin-bottom: 8px;
+      font-size: 15px; color: var(--text-2); line-height: 1.75;
+    }
+    h2 {
+      font-size: 17px; font-weight: 800;
+      margin-top: 48px; margin-bottom: 14px;
+      padding-bottom: 12px;
+      border-bottom: 1px solid var(--border);
+      color: var(--text);
+    }
+    p { font-size: 15px; color: var(--text-2); margin-bottom: 14px; line-height: 1.75; }
+    ul { padding-left: 20px; margin-bottom: 14px; }
+    ul li { font-size: 15px; color: var(--text-2); margin-bottom: 6px; line-height: 1.7; }
+    table { width: 100%; border-collapse: collapse; margin: 12px 0 24px; font-size: 14px; }
+    th {
+      background: var(--table-head);
+      text-align: left; font-weight: 700; color: var(--text);
+      padding: 12px 14px;
+      border: 1px solid var(--border);
+    }
+    td { padding: 11px 14px; border: 1px solid var(--border); color: var(--text-2); vertical-align: top; }
+    footer {
+      text-align: center; margin-top: 56px;
+      font-size: 12px; color: var(--text-3);
+      padding-top: 24px; border-top: 1px solid var(--border);
+    }
+    footer a { color: var(--text-3); text-decoration: none; }
+    footer a:hover { color: var(--blue); }
+  </style>
+</head>
+<body>
+<nav>
+  <a href="index.html" class="nav-logo">🥋 <span>도장</span>깨기</a>
+  <div style="display:flex;align-items:center;gap:16px;">
+    <a href="index.html" class="nav-back">← 홈으로</a>
+    <button class="theme-toggle" id="themeToggle">🌙</button>
+  </div>
+</nav>
+
+<div class="container">
+  <div class="doc-label">PRIVACY POLICY</div>
+  <h1>개인정보처리방침</h1>
+  <div class="date">시행일자 : 2026-06-01 &nbsp;|&nbsp; 최종 수정일 : 2026-06-01</div>
+
+  <div class="intro">
+    앤써(이하 "회사")는 개인정보보호법 등 관련 법령에 따라 이용자의 개인정보를 보호하고, 관련 고충을 신속하고 원활하게 처리하기 위하여 다음과 같은 개인정보처리방침을 수립·공개합니다.<br><br>
+    본 개인정보처리방침은 회사가 제공하는 "도장깨기" 모바일 애플리케이션 및 관련 서비스에 적용됩니다.
+  </div>
+
+  <h2>제1조 (개인정보의 수집 및 이용 목적)</h2>
+  <p>회사는 다음 목적을 위하여 개인정보를 처리합니다.</p>
+  <ul>
+    <li>회원가입 및 계정 관리</li>
+    <li>소셜 로그인 제공</li>
+    <li>위치 기반 서비스 제공</li>
+    <li>커뮤니티 및 리뷰 기능 제공</li>
+    <li>서비스 안정성 확보 및 오류 분석</li>
+  </ul>
+
+  <h2>제2조 (개인정보의 보유 및 이용기간)</h2>
+  <table>
+    <tr><th>보관 항목</th><th>보관 기간</th><th>근거 법령</th></tr>
+    <tr><td>계약/청약철회 기록</td><td>5년</td><td>전자상거래법</td></tr>
+    <tr><td>소비자 불만/분쟁 기록</td><td>3년</td><td>전자상거래법</td></tr>
+    <tr><td>로그인 기록</td><td>3개월</td><td>통신비밀보호법</td></tr>
+  </table>
+
+  <h2>제3조 (만 14세 미만 아동의 개인정보 처리)</h2>
+  <p>회사는 만 14세 미만 아동의 개인정보를 수집하지 않습니다.</p>
+
+  <h2>제4조 (개인정보의 제3자 제공)</h2>
+  <p>회사는 이용자의 개인정보를 원칙적으로 외부에 제공하지 않습니다.</p>
+
+  <h2>제5조 (개인정보 처리의 위탁)</h2>
+  <table>
+    <tr><th>수탁 업체</th><th>위탁 업무</th></tr>
+    <tr><td>Supabase</td><td>데이터 저장 및 인증</td></tr>
+    <tr><td>Google Firebase</td><td>푸시 알림 및 분석</td></tr>
+    <tr><td>Google</td><td>구글 로그인</td></tr>
+    <tr><td>카카오</td><td>카카오 로그인</td></tr>
+    <tr><td>Apple</td><td>애플 로그인</td></tr>
+  </table>
+
+  <h2>제6조 (개인정보의 파기 절차 및 방법)</h2>
+  <p>회사는 개인정보 보유기간 경과 또는 처리 목적 달성 시 지체 없이 개인정보를 파기합니다.</p>
+
+  <h2>제7조 (이용자의 권리와 행사 방법)</h2>
+  <p>이용자는 언제든지 개인정보 열람, 수정, 삭제, 처리 정지, 회원 탈퇴를 요청할 수 있습니다.</p>
+
+  <h2>제8조 (개인정보의 안전성 확보 조치)</h2>
+  <p>회사는 접근 권한 최소화, 암호화 저장, 보안 시스템 운영 등의 조치를 시행합니다.</p>
+
+  <h2>제9조 (위치정보 이용)</h2>
+  <p>주변 체육관 탐색 및 지도 기반 서비스 제공을 위해 위치정보를 수집할 수 있습니다.</p>
+
+  <h2>제10조 (광고 및 알림)</h2>
+  <p>앱 푸시 알림 및 이메일을 통해 서비스 안내를 할 수 있습니다.</p>
+
+  <h2>제11조 (개인정보 보호책임자)</h2>
+  <table>
+    <tr><th>구분</th><th>내용</th></tr>
+    <tr><td>회사명</td><td>앤써</td></tr>
+    <tr><td>대표자</td><td>박지수</td></tr>
+    <tr><td>이메일</td><td>answer2451@gmail.com</td></tr>
+  </table>
+
+  <h2>제12조 (권익침해 구제방법)</h2>
+  <p>개인정보침해신고센터(118) 등을 통해 신고할 수 있습니다.</p>
+
+  <h2>제13조 (개인정보처리방침의 변경)</h2>
+  <p>본 방침은 2026년 6월 1일부터 시행됩니다.</p>
+
+  <footer>
+    © 2026 앤써 (Answer) &nbsp;·&nbsp;
+    <a href="location-terms.html">위치정보서비스 이용약관</a> &nbsp;·&nbsp;
+    <a href="support.html">고객 지원</a>
+  </footer>
+</div>
+
+<script>
+  const t = document.getElementById('themeToggle');
+  const h = document.documentElement;
+  const s = localStorage.getItem('theme') || 'dark';
+  h.setAttribute('data-theme', s);
+  t.textContent = s === 'dark' ? '🌙' : '☀️';
+  t.addEventListener('click', () => {
+    const n = h.getAttribute('data-theme') === 'dark' ? 'light' : 'dark';
+    h.setAttribute('data-theme', n); t.textContent = n === 'dark' ? '🌙' : '☀️';
+    localStorage.setItem('theme', n);
+  });
+</script>
+</body>
+</html>
