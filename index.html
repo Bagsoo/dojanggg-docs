@@ -671,6 +671,7 @@
     <a href="#features" class="nav-menu-item">기능</a>
     <a href="#download" class="nav-menu-item">다운로드</a>
     <a href="support.html" class="nav-menu-item">고객지원</a>
+    <a href="https://46905408.dojang-ggaegi-app.pages.dev" class="nav-menu-item" data-app-launch>도장깨기</a>
   </div >
 
   <div class="nav-right">
@@ -688,7 +689,8 @@
 <div class="mobile-menu" id="mobileMenu">
   <a href="#features">기능</a>
   <a href="#download">다운로드</a>
-  <a href="support.html">고객지원</a>  
+  <a href="support.html">고객지원</a>
+  <a href="https://46905408.dojang-ggaegi-app.pages.dev" target="_blank" rel="noopener noreferrer" data-app-launch>도장깨기</a>
 </div>
 
 <!-- ── 히어로 ─────────────────────────────────────── -->
@@ -956,6 +958,45 @@
 </footer>
 
 <script>
+  // 앱이 설치되어 있으면 실행하고, 그렇지 않으면 OS별 스토어로 이동한다.
+  const appWebUrl = 'https://46905408.dojang-ggaegi-app.pages.dev';
+  const appDeepLink = 'dojangggaegi://login-callback/';
+  const appStoreUrl = 'https://apps.apple.com/kr/app/%EB%8F%84%EC%9E%A5%EA%B9%A8%EA%B8%B0-%EC%B2%B4%EC%9C%A1%EA%B4%80-%EC%B0%BE%EA%B8%B0-%EA%B2%A9%ED%88%AC%EA%B8%B0-%EC%BB%A4%EB%AE%A4%EB%8B%88%ED%8B%B0/id6778637544';
+  const playStoreUrl = 'https://play.google.com/store/apps/details?id=com.dojangggaegi.dojang_ggaegi';
+
+  function isIosDevice() {
+    return /iPad|iPhone|iPod/.test(navigator.userAgent) ||
+      (navigator.platform === 'MacIntel' && navigator.maxTouchPoints > 1);
+  }
+
+  function openAppOrStore(event) {
+    event.preventDefault();
+
+    if (!/Android|iPhone|iPad|iPod/i.test(navigator.userAgent) && !isIosDevice()) {
+      window.location.href = appWebUrl;
+      return;
+    }
+
+    const storeUrl = isIosDevice() ? appStoreUrl : playStoreUrl;
+    let appOpened = false;
+    const markAppOpened = () => {
+      appOpened = true;
+    };
+
+    document.addEventListener('visibilitychange', markAppOpened, { once: true });
+    window.location.href = appDeepLink;
+
+    window.setTimeout(() => {
+      if (!appOpened && document.visibilityState === 'visible') {
+        window.location.href = storeUrl;
+      }
+    }, 1500);
+  }
+
+  document.querySelectorAll('[data-app-launch]').forEach((link) => {
+    link.addEventListener('click', openAppOrStore);
+  });
+
   // ── 테마 토글 ──
   const toggle = document.getElementById('themeToggle');
   const html = document.documentElement;
